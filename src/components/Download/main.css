@@ -1,0 +1,17 @@
+.download {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  background-color: #33E;
+  color: white;
+  border: none;
+
+  padding: 15px 32px;
+  font-size: 1em;
+
+  text-align: center;
+  text-decoration: none;
+
+  outline: none;
+  cursor: pointer;
+}

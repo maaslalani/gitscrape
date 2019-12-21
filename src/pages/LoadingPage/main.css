@@ -1,0 +1,27 @@
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex: 1;
+  flex-direction: column;
+}
+
+.pulse {
+  margin: 20px;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 100%;
+  background-color: #33E;
+
+  opacity: 0.75;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0px  rgba(51, 51, 238, 0.6) }
+   70% { box-shadow: 0 0 0 15px rgba(51, 51, 238, 0.0) }
+  100% { box-shadow: 0 0 0 0px  rgba(51, 51, 238, 0.0) }
+}

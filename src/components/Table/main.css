@@ -1,0 +1,11 @@
+.table {
+  padding: 2em;
+}
+
+.table th, .table td {
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  width: 15em;
+  height: 2em;
+}
+

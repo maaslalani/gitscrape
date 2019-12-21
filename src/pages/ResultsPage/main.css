@@ -1,0 +1,4 @@
+.result {
+  display: flex;
+  flex-direction: column;
+}

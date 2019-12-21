@@ -1,0 +1,41 @@
+.search-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 7.5vh;
+  height: 100%;
+
+  box-sizing: border-box;
+  border: 2px solid #000000;
+  border-left: none;
+
+  outline: none;
+  cursor: pointer;
+
+  transition: background-color 100ms ease;
+}
+
+.search-icon:hover {
+  background-color: rgba(51, 51, 238, 0.1);
+}
+
+.search-bar {
+  width: 50vw;
+  height: 7.5vh;
+
+  padding-left: 1em;
+  padding-right: 1em;
+
+  font-size: 18px;
+
+  outline: none;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+}
+

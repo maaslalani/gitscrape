@@ -1,0 +1,15 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 4em;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  background-color: #333;
+  color: #FFF;
+
+  font-size: 1em;
+  font-family: 'Roboto Mono', monospace;
+}
