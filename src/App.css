@@ -1,38 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap');
+
 .App {
-  text-align: center;
+  font-family: 'Roboto', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App-nav {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+
+  height: 4em;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  background-color: #333;
+  color: #FFF;
+
+  font-size: 1em;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.content {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+
+  flex: 1;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
+.search-container {
+  display: flex;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 7.5vh;
+  height: 100%;
+
+  box-sizing: border-box;
+  border: 2px solid #000000;
+  border-left: none;
+
+  outline: none;
+  cursor: pointer;
+
+  transition: background-color 100ms ease;
+}
+
+.search-icon:hover {
+  background-color: rgba(51, 51, 238, 0.1);
+}
+
+.search-bar {
+  width: 50vw;
+  height: 7.5vh;
+
+  padding-left: 1em;
+  padding-right: 1em;
+
+  font-size: 18px;
+
+  outline: none;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+}
+
+.instructions {
+  padding: 2em;
+}
+
+.instructions p {
+  text-align: center;
+  margin: 1em;
 }
