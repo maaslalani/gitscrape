@@ -10,7 +10,7 @@ function Table({data}) {
     <table className="table">
       <tbody>
         <tr>{tableHeaders.map(th => <th key={th}>{capitalize(th)}</th>)}</tr>
-        {data.map(row => <tr>{Object.values(row).map(column => <td>{column}</td>)}</tr>)}
+        {data.map((row, index) => <tr key={index}>{Object.values(row).map(column => <td key={column}>{column}</td>)}</tr>)}
       </tbody>
     </table>
   );

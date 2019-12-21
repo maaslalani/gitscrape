@@ -1,5 +1,6 @@
 .table {
   padding: 2em;
+  width: 100%;
 }
 
 .table th, .table td {
