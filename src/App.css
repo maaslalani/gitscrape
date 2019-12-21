@@ -9,9 +9,6 @@
   height: 100vh;
 }
 
-.App-logo {
-}
-
 .App-nav {
   display: flex;
   align-items: center;
@@ -26,6 +23,9 @@
 
   font-size: 1em;
   font-family: 'Roboto Mono', monospace;
+}
+
+.logo {
 }
 
 .content {
@@ -85,4 +85,57 @@
 .instructions p {
   text-align: center;
   margin: 1em;
+}
+
+.download {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  background-color: #33E;
+  color: white;
+  border: none;
+
+  padding: 15px 32px;
+  font-size: 1em;
+
+  text-align: center;
+  text-decoration: none;
+
+  outline: none;
+  cursor: pointer;
+}
+
+.loading {
+  margin: 20px;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 100%;
+  background-color: #33E;
+
+  opacity: 0.75;
+  animation: pulse 2s infinite;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+}
+
+.table {
+  padding: 2em;
+}
+
+.table th, .table td {
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  width: 15em;
+  height: 2em;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0px  rgba(51, 51, 238, 0.6) }
+   70% { box-shadow: 0 0 0 15px rgba(51, 51, 238, 0.0) }
+  100% { box-shadow: 0 0 0 0px  rgba(51, 51, 238, 0.0) }
 }
