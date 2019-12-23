@@ -1,0 +1,18 @@
+{
+  "name": "gitscrape-api",
+  "version": "1.0.0",
+  "description": "API for gitscrape",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "type": "module",
+  "author": "Maas Lalani",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/graphql": "^4.3.1",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "octonode": "^0.9.5"
+  }
+}
