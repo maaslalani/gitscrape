@@ -18,7 +18,7 @@ function App() {
   async function onSubmit() {
     const [username, repository] = search.split('/').slice(-2);
     setLoading(true);
-    const response = await fetch(`${BASE_URL}/${username}/${repository}`)
+    const response = await fetch(`${BASE_URL}/${username}/${repository}`);
     const json = await response.json();
     setResults(json);
     setLoading(false);
