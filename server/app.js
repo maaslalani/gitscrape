@@ -1,7 +1,9 @@
-const express = require("express");
-const octokit = require("@octokit/graphql");
+import express from 'express';
+import octokit from '@octokit/graphql';
 
-let clearbit = require('clearbit')(process.env.CLEARBIT_TOKEN);
+import Clearbit from 'clearbit';
+const { Client } = Clearbit;
+const clearbit = new Client({ key: process.env.CLEARBIT_TOKEN });
 
 const { graphql } = octokit;
 
@@ -59,27 +61,27 @@ app.get('/:user/:repository', async function(request, response) {
   const uniqueUsers = users.filter(user => {
     const duplicate = seenUsers.has(user.login);
     let Person = clearbit.Person;
-    
-    if(user.email){
+
+    if (user.email) {
       Person.find({email: user.email})
-      .then(function (person) {
-        user.linkedin =  person.linkedin
-        console.log(user.linkedin)
-      })
-      .catch(Person.QueuedError, function (err) {
-        console.log(err); 
-      })
-      .catch(Person.NotFoundError, function (err) {
-        console.log(err); 
-      })
-      .catch(function (err) {
-        console.log('Bad/invalid request, unauthorized, Clearbit error, or failed request');
-      });
+        .then(function (person) {
+          user.linkedin = person.linkedin;
+          console.log(user.linkedin);
+        })
+        .catch(Person.QueuedError, function (err) {
+          console.log(err);
+        })
+        .catch(Person.NotFoundError, function (err) {
+          console.log(err);
+        })
+        .catch(function (err) {
+          console.log('Bad/invalid request, unauthorized, Clearbit error, or failed request');
+        });
     }
-        
-        seenUsers.add(user.login);
-        return !duplicate;
-      });
+
+    seenUsers.add(user.login);
+    return !duplicate;
+  });
 
   response.json(uniqueUsers);
 });
