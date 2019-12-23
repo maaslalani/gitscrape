@@ -74,8 +74,6 @@ app.get('/:user/:repository', async function(request, response) {
     linkedin: await getUserLinkedin(user.email),
   })));
 
-  console.log(uniqueUsers);
-
   response.json(uniqueUsers);
 });
 
