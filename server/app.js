@@ -1,6 +1,9 @@
 import express from 'express';
 import octokit from '@octokit/graphql';
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 import Clearbit from 'clearbit';
 const { Client } = Clearbit;
 const clearbit = new Client({ key: process.env.CLEARBIT_TOKEN });
