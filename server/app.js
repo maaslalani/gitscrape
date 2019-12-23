@@ -65,41 +65,29 @@ app.get('/:user/:repository', async function(request, response) {
     return !duplicate;
   });
 
-  uniqueUsers = uniqueUsers.map(user =>({
+  uniqueUsers = await Promise.all(uniqueUsers.map(async user => ({
     name: user.name,
     login: user.login,
     email: user.email,
     url: user.url,
     websiteUrl: user.websiteUrl,
-    linkedin: getLinkedin(user.emai),
-  }))
+    linkedin: await getUserLinkedin(user.email),
+  })));
+
+  console.log(uniqueUsers);
 
   response.json(uniqueUsers);
 });
 
 
-async function getLinkedin(email){
-  let Person = clearbit.Person;
-  let linkedin; 
-  if(email){
-    Person.find({email: email})
-      .then(function (person) {
-        linkedin = person.linkedin;
-        console.log(person.linkedin);
-        return linkedin
-      })
-      .catch(Person.QueuedError, function (err) {
-        console.log(err);
-      })
-      .catch(Person.NotFoundError, function (err) {
-        console.log(err);
-      })
-      .catch(function (err) {
-        console.log('Bad/invalid request, unauthorized, Clearbit error, or failed request');
-      });    
+async function getUserLinkedin(email){
+  try {
+    const person = await clearbit.Person.find({email});
+    if (!person.linkedin.handle) throw 'No linkedin';
+    return 'https://linkedin.com/' + person.linkedin.handle;
+  } catch (error) {
+    return '';
   }
-
-  return linkedin
 }
 
 app.listen(3001);
