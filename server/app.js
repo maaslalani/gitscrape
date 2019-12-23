@@ -40,41 +40,47 @@ const fetchUsers = ({user, repository}) =>
   `;
 
 app.get('/:user/:repository', async function(request, response) {
-  const { repository } = await graphql(fetchUsers(request.params),
-    {
-      headers: {
-        authorization: `token ${process.env.GITHUB_TOKEN}`
+  try {
+    const { repository } = await graphql(fetchUsers(request.params),
+      {
+        headers: {
+          authorization: `token ${process.env.GITHUB_TOKEN}`
+        }
       }
-    }
-  );
+    );
 
-  const { mentionableUsers, forks, stargazers } = repository;
+    const { mentionableUsers, forks, stargazers } = repository;
 
-  const users = [
-    ...mentionableUsers.nodes,
-    ...forks.nodes.map(fork => fork.mentionableUsers.nodes[0]),
-    ...stargazers.nodes,
-  ];
+    const users = [
+      ...mentionableUsers.nodes,
+      ...forks.nodes.map(fork => fork.mentionableUsers.nodes[0]),
+      ...stargazers.nodes,
+    ];
 
-  // Since stargazers can also be forkers, filter out duplicates
-  const seenUsers = new Set();
-  let uniqueUsers = users.filter(user => {
-    const duplicate = seenUsers.has(user.login);
+    // Since stargazers can also be forkers, filter out duplicates
+    const seenUsers = new Set();
+    let uniqueUsers = users.filter(user => {
+      const duplicate = seenUsers.has(user.login);
 
-    seenUsers.add(user.login);
-    return !duplicate;
-  });
+      seenUsers.add(user.login);
+      return !duplicate;
+    });
 
-  uniqueUsers = await Promise.all(uniqueUsers.map(async user => ({
-    name: user.name,
-    login: user.login,
-    email: user.email,
-    url: user.url,
-    websiteUrl: user.websiteUrl,
-    linkedin: await getUserLinkedin(user.email),
-  })));
+    uniqueUsers = await Promise.all(uniqueUsers.map(async user => ({
+      name: user.name,
+      login: user.login,
+      email: user.email,
+      url: user.url,
+      websiteUrl: user.websiteUrl,
+      linkedin: await getUserLinkedin(user.email),
+    })));
 
-  response.json(uniqueUsers);
+    response.json(uniqueUsers);
+  } catch (error) {
+    response.json([{
+      error: "Could not fetch repository"
+    }]);
+  }
 });
 
 

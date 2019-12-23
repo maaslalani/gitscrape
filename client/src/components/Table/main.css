@@ -4,9 +4,17 @@
 }
 
 .table th, .table td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #DDD;
   text-align: left;
   width: 15em;
   height: 2em;
 }
 
+a {
+  color: #33E;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 1px solid #33E;
+}
