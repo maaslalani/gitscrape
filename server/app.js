@@ -1,5 +1,7 @@
-import express from 'express';
-import octokit from '@octokit/graphql';
+const express = require("express");
+const octokit = require("@octokit/graphql");
+
+let clearbit = require('clearbit')(process.env.CLEARBIT_TOKEN);
 
 const { graphql } = octokit;
 
@@ -56,9 +58,28 @@ app.get('/:user/:repository', async function(request, response) {
   const seenUsers = new Set();
   const uniqueUsers = users.filter(user => {
     const duplicate = seenUsers.has(user.login);
-    seenUsers.add(user.login);
-    return !duplicate;
-  });
+    let Person = clearbit.Person;
+    
+    if(user.email){
+      Person.find({email: user.email})
+      .then(function (person) {
+        user.linkedin =  person.linkedin
+        console.log(user.linkedin)
+      })
+      .catch(Person.QueuedError, function (err) {
+        console.log(err); 
+      })
+      .catch(Person.NotFoundError, function (err) {
+        console.log(err); 
+      })
+      .catch(function (err) {
+        console.log('Bad/invalid request, unauthorized, Clearbit error, or failed request');
+      });
+    }
+        
+        seenUsers.add(user.login);
+        return !duplicate;
+      });
 
   response.json(uniqueUsers);
 });
