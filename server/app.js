@@ -58,32 +58,48 @@ app.get('/:user/:repository', async function(request, response) {
 
   // Since stargazers can also be forkers, filter out duplicates
   const seenUsers = new Set();
-  const uniqueUsers = users.filter(user => {
+  let uniqueUsers = users.filter(user => {
     const duplicate = seenUsers.has(user.login);
-    let Person = clearbit.Person;
-
-    if (user.email) {
-      Person.find({email: user.email})
-        .then(function (person) {
-          user.linkedin = person.linkedin;
-          console.log(user.linkedin);
-        })
-        .catch(Person.QueuedError, function (err) {
-          console.log(err);
-        })
-        .catch(Person.NotFoundError, function (err) {
-          console.log(err);
-        })
-        .catch(function (err) {
-          console.log('Bad/invalid request, unauthorized, Clearbit error, or failed request');
-        });
-    }
 
     seenUsers.add(user.login);
     return !duplicate;
   });
 
+  uniqueUsers = uniqueUsers.map(user =>({
+    name: user.name,
+    login: user.login,
+    email: user.email,
+    url: user.url,
+    websiteUrl: user.websiteUrl,
+    linkedin: getLinkedin(user.emai),
+  }))
+
   response.json(uniqueUsers);
 });
+
+
+async function getLinkedin(email){
+  let Person = clearbit.Person;
+  let linkedin; 
+  if(email){
+    Person.find({email: email})
+      .then(function (person) {
+        linkedin = person.linkedin;
+        console.log(person.linkedin);
+        return linkedin
+      })
+      .catch(Person.QueuedError, function (err) {
+        console.log(err);
+      })
+      .catch(Person.NotFoundError, function (err) {
+        console.log(err);
+      })
+      .catch(function (err) {
+        console.log('Bad/invalid request, unauthorized, Clearbit error, or failed request');
+      });    
+  }
+
+  return linkedin
+}
 
 app.listen(3001);
