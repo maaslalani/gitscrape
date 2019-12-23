@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
 
+  min-height: 4em;
   height: 4em;
   padding-left: 1em;
   padding-right: 1em;
