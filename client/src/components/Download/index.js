@@ -1,11 +1,16 @@
 import React from 'react';
 import './main.css';
 
-function Download({data, onClick}) {
+function Download({data}) {
   return (
-    <button className="download" onClick={onClick}>
-      Download
-    </button>
+    <div className="download-container">
+      <button download className="download-json">
+        Download JSON
+      </button>
+      <button download className="download-csv">
+        Download CSV
+      </button>
+    </div>
   )
 }
 

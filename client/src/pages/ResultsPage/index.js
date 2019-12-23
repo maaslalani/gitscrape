@@ -5,7 +5,7 @@ import Table from '../../components/Table';
 function ResultsPage({results}) {
   return (
     <div className="result">
-      <Download />
+      <Download data={results} />
       <Table data={results} />
     </div>
   );

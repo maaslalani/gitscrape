@@ -1,6 +1,7 @@
 .table {
   padding: 2em;
   width: 100%;
+  margin-bottom: 5em;
 }
 
 .table th, .table td {

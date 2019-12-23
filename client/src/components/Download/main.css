@@ -1,12 +1,18 @@
-.download {
+.download-container {
+  background-color: white;
   position: fixed;
-  bottom: 1em;
-  right: 1em;
-  background-color: #33E;
+  width: 100vw;
+  bottom: 0;
+  text-align: center;
+  border-top: 1px solid #DDD;
+}
+
+.download-csv, .download-json {
+  margin: 1em;
   color: white;
   border: none;
 
-  padding: 15px 32px;
+  padding: 12px 32px;
   font-size: 1em;
 
   text-align: center;
@@ -14,4 +20,13 @@
 
   outline: none;
   cursor: pointer;
+}
+
+.download-json {
+  background-color: #33E;
+}
+
+.download-csv {
+  background-color: #33E;
+  opacity: 0.75;
 }
