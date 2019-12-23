@@ -24,9 +24,9 @@
 
 .download-json {
   background-color: #33E;
+  opacity: 0.75;
 }
 
 .download-csv {
   background-color: #33E;
-  opacity: 0.75;
 }

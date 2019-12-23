@@ -1,7 +1,9 @@
 import React from 'react';
 import './main.css';
 
-const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function Table({data}) {
   const tableHeaders = Object.keys(data[0]);
@@ -10,9 +12,25 @@ function Table({data}) {
     <table className="table">
       <tbody>
         <tr>{tableHeaders.map(th => <th key={th}>{capitalize(th)}</th>)}</tr>
-        {data.map((row, index) => <tr key={index}>{Object.values(row).map(column => <td key={column}>{isUrl(column) ? wrapLink(column) : column}</td>)}</tr>)}
+        {data.map(mapRows)}
       </tbody>
     </table>
+  );
+}
+
+function mapRows(row, index) {
+  return (
+    <tr key={index}>
+      {Object.values(row).map(mapColumns)}
+    </tr>
+  );
+}
+
+function mapColumns(column, index) {
+  return (
+    <td key={column + index}>
+      {isUrl(column) ? wrapLink(column) : column}
+    </td>
   );
 }
 
@@ -26,7 +44,7 @@ function isUrl(string) {
 
 function wrapLink(url) {
   return (
-    <a target="_blank" href={url}>{url}</a>
+    <a rel="noopener noreferrer" target="_blank" href={url}>{url}</a>
   );
 }
 
