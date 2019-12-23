@@ -8,34 +8,20 @@ import Navigation from './components/Navigation';
 
 import './App.css';
 
-const sampleData = [
-  {
-    name: 'Maas Lalani',
-    login: 'maaslalani',
-    website: 'maaslalani.com',
-    linkedin: 'https://linkedin.com/in/maaslalani'
-  },
-  {
-    name: 'Darshil Patel',
-    login: 'darshil',
-    website: 'darshilpatel.com',
-    linkedin: 'https://linkedin.com/in/darshil36'
-  },
-];
+const BASE_URL = 'http://localhost:3001';
 
 function App() {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState();
   const [loading, setLoading] = useState(false);
 
-  function onSubmit() {
+  async function onSubmit() {
+    const [username, repository] = search.split('/').slice(-2);
     setLoading(true);
-    fetch('http://localhost:3001/maaslalani/startup-cli', { mode: 'no-cors' })
-      .then(response => console.log(response));
-    setTimeout(() => {
-      setLoading(false);
-      setResults(sampleData);
-    }, 3000);
+    const response = await fetch(`${BASE_URL}/${username}/${repository}`)
+    const json = await response.json();
+    setResults(json);
+    setLoading(false);
   }
 
   return (
