@@ -166,7 +166,7 @@ async function organizationToUsers(organization) {
     return !duplicate;
   });
 
-  return uniqueUsers;
+  return uniqueUsers[0];
 }
 
 app.listen(3001);

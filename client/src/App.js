@@ -16,9 +16,19 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   async function onSubmit() {
-    const [username, repository] = search.split('/').slice(-2);
+    const [owner, repository] = search.split('/').slice(-2);
     setLoading(true);
-    const response = await fetch(`${BASE_URL}/${username}/${repository}`);
+    let endpoint;
+
+    if (owner && repository) {
+      endpoint = `${owner}/${repository}`;
+    } else if (owner && !repository) {
+      endpoint = `organization/${owner}`;
+    } else {
+      return;
+    }
+
+    const response = await fetch(`${BASE_URL}/${endpoint}`);
     const json = await response.json();
     setResults(json);
     setLoading(false);
