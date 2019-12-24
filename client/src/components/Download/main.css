@@ -7,7 +7,12 @@
   border-top: 1px solid #DDD;
 }
 
+.csv-downloader {
+  display: inline-block;
+}
+
 .download-csv, .download-json {
+  display: inline;
   margin: 1em;
   color: white;
   border: none;
