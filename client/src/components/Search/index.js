@@ -23,7 +23,7 @@ function Search({search, setSearch, onSubmit}) {
         placeholder="https://github.com/stripe-ctf">
       </input>
       <button className="search-icon" onClick={onSubmit}>
-        <img src={SearchIcon} alt="search icon" />
+        <img className= "search-icon-image"src={SearchIcon} alt="search icon"/>
       </button>
     </div>
   );

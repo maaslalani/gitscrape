@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 
-  width: 7.5vh;
+  width: 6.5vh;
   height: 100%;
 
   box-sizing: border-box;
@@ -39,3 +39,14 @@
   box-sizing: border-box;
 }
 
+@media only screen and (max-width: 600px) {
+  .search-icon {
+  width: 3.75vh;
+  height: 100%;
+  }
+
+  .search-icon-image{
+    width: 20px;
+    height: 20px;
+  }
+}
