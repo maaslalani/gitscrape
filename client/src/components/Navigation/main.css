@@ -14,3 +14,10 @@
   font-size: 1em;
   font-family: 'Roboto Mono', monospace;
 }
+
+.navLink{
+  color: #FFF;
+}
+ .navLink:hover{
+   border: 0;
+ }

@@ -15,7 +15,7 @@ function Search({search, setSearch, onSubmit}) {
         value={search}
         onChange={handleChange}
         className="search-bar"
-        placeholder="https://github.com/stripe">
+        placeholder="https://github.com/stripe-ctf">
       </input>
       <button className="search-icon" onClick={onSubmit}>
         <img src={SearchIcon} alt="search icon" />

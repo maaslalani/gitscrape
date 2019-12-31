@@ -14,16 +14,19 @@ function App() {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState();
   const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState('');
 
   async function onSubmit() {
     const [owner, repository] = search.split('/').slice(-2);
     setLoading(true);
-    let endpoint;
 
+    let endpoint, urlHolder;
     if (owner && repository) {
       endpoint = `${owner}/${repository}`;
+      urlHolder = endpoint
     } else if (owner && !repository) {
       endpoint = `organization/${owner}`;
+      urlHolder = owner;
     } else {
       return;
     }
@@ -32,12 +35,13 @@ function App() {
     const json = await response.json();
     setResults(json);
     setLoading(false);
+    setUrl(urlHolder);
   }
 
   return (
     <div className="App">
-      <Navigation />
-      {results && <ResultsPage results={results} />}
+      <Navigation link={url} />
+      {results && <ResultsPage results={results} filename={url} />}
       {loading && <LoadingPage />}
       {!loading && !results && (
       <SearchPage

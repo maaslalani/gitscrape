@@ -1,13 +1,16 @@
 import React from 'react';
 import './main.css';
 
-function Navigation() {
+function Navigation({link}) {
   return (
     <nav className="navigation">
-      <div>Git Scrape</div>
-      <div>View on Github</div>
+      <div><a className="navLink" href="" onClick={refreshPage}>Git Scrape</a></div>
+      <div><a className="navLink" href={"https://github.com/" + link} >View on Github</a></div>
     </nav>
   );
 }
 
+function refreshPage(){ 
+  window.location.reload(); 
+}
 export default Navigation;
