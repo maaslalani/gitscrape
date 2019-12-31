@@ -11,6 +11,11 @@ function Search({search, setSearch, onSubmit}) {
   return (
     <div className="search-container">
       <input
+        onKeyPress={(input) => {
+          if (input.key === 'Enter') {
+            onSubmit()
+          }
+        }}
         onSubmit={onSubmit}
         value={search}
         onChange={handleChange}
