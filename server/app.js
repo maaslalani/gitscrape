@@ -121,6 +121,8 @@ app.get('/:user/:repository', async function(request, response) {
       }
     );
 
+    console.log(repository);
+
     const uniqueUsers = await repositoryToUsers(repository);
     response.json(uniqueUsers);
 
@@ -132,7 +134,7 @@ app.get('/:user/:repository', async function(request, response) {
 });
 
 
-async function getUserLinkedin(email){
+async function getUserLinkedin(email) {
   try {
     const person = await clearbit.Person.find({email});
     if (!person.linkedin.handle) throw 'No linkedin';
@@ -146,9 +148,9 @@ async function repositoryToUsers(repository) {
   const { forks, stargazers } = repository;
 
   const users = [
-    repository.owner,
-    ...forks.nodes,
+    ...forks.nodes.map(fork => fork.owner),
     ...stargazers.nodes,
+    repository.owner,
   ];
 
   // Since stargazers can also be forkers, filter out duplicates
