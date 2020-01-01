@@ -18,11 +18,16 @@ function App() {
 
   async function onSubmit() {
     const [owner, repository] = search.split('/').slice(-2);
+    console.log(owner, repository);
     setLoading(true);
 
     let endpoint, urlHolder;
     if (owner && repository) {
-      endpoint = `${owner}/${repository}`;
+      if (owner == 'github.com') {
+        endpoint = `organization/${repository}`;
+      } else {
+        endpoint = `${owner}/${repository}`;
+      }
       urlHolder = endpoint
     } else if (owner && !repository) {
       endpoint = `organization/${owner}`;
