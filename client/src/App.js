@@ -25,10 +25,11 @@ function App() {
     if (owner && repository) {
       if (owner == 'github.com') {
         endpoint = `organization/${repository}`;
+        urlHolder = repository;
       } else {
         endpoint = `${owner}/${repository}`;
+        urlHolder = endpoint
       }
-      urlHolder = endpoint
     } else if (owner && !repository) {
       endpoint = `organization/${owner}`;
       urlHolder = owner;

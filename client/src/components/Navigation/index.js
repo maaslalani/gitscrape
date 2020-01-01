@@ -5,7 +5,7 @@ function Navigation({link}) {
   return (
     <nav className="navigation">
       <div><a className="navLink" href="" onClick={refreshPage}>Git Scrape</a></div>
-      <div><a className="navLink" href={"https://github.com/" + link} >View on Github</a></div>
+      <div><a className="navLink" target="_blank" href={"https://github.com/" + link} >View on Github</a></div>
     </nav>
   );
 }
