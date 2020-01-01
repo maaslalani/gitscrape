@@ -11,31 +11,39 @@ const clearbit = new Client({ key: process.env.CLEARBIT_TOKEN });
 const { graphql } = octokit;
 const app = express();
 
-const userNodes = `
-  nodes {
-    name
-    login
-    email
-    url
-    websiteUrl
-  }
-`;
-
 const fetchUsers = ({user, repository}) => 
   `{
       repository(owner: "${user}", name: "${repository}") {
         stargazers(first: 20) {
-          ${userNodes}
+          nodes {
+            name
+            login
+            email
+            url
+            websiteUrl
+          }
         }
         forks(first: 20) {
           nodes {
-            mentionableUsers(last: 1) {
-              ${userNodes}
+            owner {
+              ... on User {
+                name
+                login
+                email
+                url
+                websiteUrl
+              }
             }
           }
         }
-        mentionableUsers(last: 20) {
-          ${userNodes}
+        owner {
+          ... on User {
+            name
+            login
+            email
+            url
+            websiteUrl
+          }
         }
       }
     }
@@ -47,17 +55,35 @@ const fetchOrganization = ({organization}) =>
         repositories(first: 20) {
           nodes {
             stargazers(first: 20) {
-              ${userNodes}
+              nodes {
+                name
+                login
+                email
+                url
+                websiteUrl
+              }
             }
             forks(first: 20) {
               nodes {
-                mentionableUsers(last: 1) {
-                  ${userNodes}
+                owner {
+                  ... on User {
+                    name
+                    login
+                    email
+                    url
+                    websiteUrl
+                  }
                 }
               }
             }
-            mentionableUsers(last: 20) {
-              ${userNodes}
+            owner {
+              ... on User {
+                name
+                login
+                email
+                url
+                websiteUrl
+              }
             }
           }
         }
@@ -117,11 +143,11 @@ async function getUserLinkedin(email){
 }
 
 async function repositoryToUsers(repository) {
-  const { mentionableUsers, forks, stargazers } = repository;
+  const { forks, stargazers } = repository;
 
   const users = [
-    ...mentionableUsers.nodes,
-    ...forks.nodes.map(fork => fork.mentionableUsers.nodes[0]),
+    repository.owner,
+    ...forks.nodes,
     ...stargazers.nodes,
   ];
 
