@@ -6,9 +6,6 @@ function Download({data, filename}) {
   const json = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
   return (
     <div className="download-container">
-      <a className="download-json" href={json} download={filename + "_users.json"}>
-        Download JSON
-      </a>
       <div className="csv-downloader">
         <CSVDownloader datas={data} filename={filename + "_users"}>
           <button className="download-csv">
@@ -16,6 +13,9 @@ function Download({data, filename}) {
           </button>
         </CSVDownloader>
       </div>
+      <a className="download-json" href={json} download={filename + "_users.json"}>
+        Download JSON
+      </a>
     </div>
   )
 }
