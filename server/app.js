@@ -14,7 +14,7 @@ const app = express();
 const fetchUsers = ({user, repository}) => 
   `{
       repository(owner: "${user}", name: "${repository}") {
-        stargazers(first: 20) {
+        stargazers(first: 100) {
           nodes {
             name
             login
@@ -23,7 +23,7 @@ const fetchUsers = ({user, repository}) =>
             websiteUrl
           }
         }
-        forks(first: 20) {
+        forks(first: 100) {
           nodes {
             owner {
               ... on User {
@@ -52,9 +52,9 @@ const fetchUsers = ({user, repository}) =>
 const fetchOrganization = ({organization}) =>
   `{
       organization(login: "${organization}") {
-        repositories(first: 20) {
+        repositories(first: 100) {
           nodes {
-            stargazers(first: 20) {
+            stargazers(first: 100) {
               nodes {
                 name
                 login
@@ -63,7 +63,7 @@ const fetchOrganization = ({organization}) =>
                 websiteUrl
               }
             }
-            forks(first: 20) {
+            forks(first: 100) {
               nodes {
                 owner {
                   ... on User {
